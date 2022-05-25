@@ -1,0 +1,40 @@
+/**********
+ * Following is the Node class that is already written.
+ 
+class Node{
+public:
+    int data;
+    Node *next;
+    Node(int data){
+        this -> data = data;
+        this -> next = NULL;
+    }
+};
+ 
+*********/
+
+
+    int fnum(Node* head)
+    {
+    if(head->next==NULL)
+    {
+        int d=head->data+1;
+        head->data=d%10;
+        return d/10;
+    }
+    int ans=fnum(head->next);
+    int d1=head->data+ans;
+    head->data=d1%10;
+    return d1/10;
+}
+
+Node* NextLargeNumber(Node *head) {
+    int ans=fnum(head);
+    if(ans)
+    {
+        Node* newhead=new Node(1);
+        newhead->next=head;
+        return newhead;
+    }
+    return head;
+}
